@@ -120,6 +120,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.stanlito
+stanlito/
 .env
 .venv
 env/
