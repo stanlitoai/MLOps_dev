@@ -5,7 +5,7 @@ from customerSatisfaction.steps.model_train import train_model
 from customerSatisfaction.steps.evaluation import evaluate_model
 
 
-@pipeline
+@pipeline(enable_cache=False)
 def train_pipeline(data_path: str):
     df = ingest_df(data_path)
     clean_df(df)
