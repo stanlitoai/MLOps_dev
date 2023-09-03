@@ -91,6 +91,7 @@ if __name__ == "__main__":
     data_cleaner = DataCleaning(data, strategies)
     X_train, X_test, y_train, y_test = data_cleaner.handle_data()
     
+    
     # Perform EDA (Exploratory Data Analysis)
     # Example: Plot histograms of numeric features
     numeric_features = X_train.select_dtypes(include=[np.number])
@@ -98,6 +99,7 @@ if __name__ == "__main__":
         sns.histplot(X_train[col], kde=True)
         plt.title(f"Histogram of {col}")
         plt.show()
+        
 
 
 
