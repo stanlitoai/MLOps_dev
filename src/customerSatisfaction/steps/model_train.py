@@ -1,14 +1,16 @@
 import logging
 
-import mlflow
+# import mlflow
 import pandas as pd
-from customerSatisfaction.config.model_dev import (
-    HyperparameterTuner,
-    LightGBMModel,
-    LinearRegressionModel,
-    RandomForestModel,
-    XGBoostModel,
-)
+# from customerSatisfaction.config.model_dev import (
+#     HyperparameterTuner,
+#     LightGBMModel,
+#     LinearRegressionModel,
+#     RandomForestModel,
+#     XGBoostModel,
+# )
+from customerSatisfaction.config.model_dev import LinearRegressionModel
+    
 from sklearn.base import RegressorMixin
 from zenml import step
 from .config import ModelNameConfig
@@ -40,23 +42,23 @@ def train_model(
     try:
         model = None
         tuner = None
-        if config.model_name = "LinearRegression":
+        if config.model_name == "LinearRegression":
             model = LinearRegressionModel()
             trained_model = model.train(X_train, y_train)
             return trained_model
-        elif config.model_name = "RandomForest":
+        elif config.model_name =="RandomForest":
             model = RandomForestModel()
             trained_model = model.train(X_train, y_train)
             return trained_model
-        elif config.model_name = "XGBoost":
+        elif config.model_name == "XGBoost":
             model = XGBoostModel()
             trained_model = model.train(X_train, y_train)
             return trained_model
-        elif config.model_name = "LightGBM":
+        elif config.model_name == "LightGBM":
             model = LightGBMModel()
             trained_model = model.train(X_train, y_train)
             return trained_model
-        elif config.model_name = "HyperparameterTuner":
+        elif config.model_name == "HyperparameterTuner":
             tuner = HyperparameterTuner()
             trained_model = tuner.train(X_train, y_train)
             return trained_model

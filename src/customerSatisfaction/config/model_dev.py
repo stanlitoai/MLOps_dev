@@ -11,7 +11,7 @@ from sklearn.linear_model import LinearRegression
 class Model(ABC):
     """Abstract class for models"""
     @abstractmethod
-    def handle_data(self, X_train, y_train):
+    def train(self, X_train, y_train):
         """
         Trains the model
         Args:

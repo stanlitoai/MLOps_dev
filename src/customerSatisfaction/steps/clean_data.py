@@ -31,6 +31,7 @@ def clean_df(df: pd.DataFrame) -> Tuple[
         split_strategy = DataSplitStrategy()
         data_cleaning = DataCleaning(processed_data, split_strategy)
         X_train, X_test, y_train, y_test = data_cleaning.handle_data()
+        return X_train, X_test, y_train, y_test
         logger.info("Data cleaning completed")
         
     except Exception as e:
