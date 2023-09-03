@@ -1,15 +1,17 @@
 import logging
 import pandas as pd
-
+import mlflow
 from customerSatisfaction.config.evaluation import MSE, RMSE, R2Score
 from sklearn.base import RegressorMixin
 from typing_extensions import Annotated
 from zenml import step
 from typing import Tuple
- 
+from zenml.client import Client
 logger = logging.getLogger(__name__)
 
-@step
+experiment_tracker = Client().active_stack.experiment_tracker
+
+@step(experiment_tracker=experiment_tracker.name)
 def evaluate_model(
     model: RegressorMixin, 
     X_test: pd.DataFrame, 
@@ -42,17 +44,17 @@ def evaluate_model(
         # Using the MSE class for mean squared error calculation
         mse_class = MSE()
         mse = mse_class.calculate_score(y_test, prediction)
-        # mlflow.log_metric("mse", mse)
+        mlflow.log_metric("mse", mse)
 
         # Using the R2Score class for R2 score calculation
         r2_class = R2Score()
         r2_score = r2_class.calculate_score(y_test, prediction)
-        # mlflow.log_metric("r2_score", r2_score)
+        mlflow.log_metric("r2_score", r2_score)
 
         # Using the RMSE class for root mean squared error calculation
         rmse_class = RMSE()
         rmse = rmse_class.calculate_score(y_test, prediction)
-        # mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("rmse", rmse)
         
         return mse, r2_score, rmse
     except Exception as e:

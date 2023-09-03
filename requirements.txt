@@ -6,5 +6,6 @@ streamlit
 xgboost
 markupsafe
 zenml
+mlflow
 scikit-learn
 -e .
